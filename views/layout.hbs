@@ -1,0 +1,29 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <title>{{title}}</title>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta name="description" content="">
+    <meta name="author" content="">
+
+    <!-- Bootstrap Core CSS -->
+    <link href="/stylesheets/bootstrap.min.css" rel="stylesheet">
+   <!-- Custom CSS -->
+    <link href="/stylesheets/round-about.css" rel="stylesheet">
+  </head>
+  <body>
+    {{> navbar  }}
+    {{{block "body"}}}
+
+    <!-- jQuery -->
+   <script src="/javascripts/jquery.js"></script>
+   <!-- Bootstrap Core JavaScript -->
+   <script src="/javascripts/bootstrap.min.js"></script>
+   <!-- custom js code -->
+   <script src="/javascripts/app.js"></script>
+   <script src="/javascripts/tutor-info-form.js"></script>
+   <script src="/javascripts/tutor-dashboard.js"></script>
+  </body>
+</html>

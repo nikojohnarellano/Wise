@@ -1,0 +1,51 @@
+
+in the end i'm using a bit of every answer that was given before:
+
+i switched from connect-mongodb to connect-mongo module
+i'm using a general conf object to store my configuration data
+there are two db connections because it's easier to handle for me (maybe changed later on, if/when a new version of mongoose/express comes out)
+
+requirements:
+
+var express = require('express'),
+  MongoStore = require('connect-mongo')(express),
+  mongo = require('mongoose');
+
+conf object:
+
+var conf = {
+db: {
+  db: 'myDb',
+  host: '192.168.1.111',
+  port: 6646,  // optional, default: 27017
+  username: 'admin', // optional
+  password: 'secret', // optional
+  collection: 'mySessions' // optional, default: sessions
+},
+secret: '076ee61d63aa10a125ea872411e433b9'
+};
+then i can configure it like this:
+
+app.configure(function(){
+// ...
+app.use(express.cookieParser());
+app.use(express.session({
+  secret: conf.secret,
+  maxAge: new Date(Date.now() + 3600000),
+  store: new MongoStore(conf.db)
+}));
+// important that this comes after session management
+app.use(app.router);
+// ...
+});
+
+and finally connect to mongodb a second time using mongoose:
+
+var dbUrl = 'mongodb://';
+dbUrl += conf.db.username + ':' + conf.db.password + '@';
+dbUrl += conf.db.host + ':' + conf.db.port;
+dbUrl += '/' + conf.db.db;
+mongo.connect(dbUrl);
+mongo.connection.on('open', function () {
+app.listen(3000);
+});

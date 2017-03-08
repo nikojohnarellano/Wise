@@ -1,0 +1,8 @@
+var wiseApp = {
+  tutorInfoForm : {
+  },
+
+  tutorDashBoard : {
+
+  }
+}
